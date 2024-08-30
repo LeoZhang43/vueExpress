@@ -49,13 +49,4 @@ export default defineComponent({
     padding: 31px 31px;
     height: calc(100vh - 16px);
 }
-.header-container{
-    
-}
-.input-container{
-    
-}
-.footer-container{
-
-}
 </style>

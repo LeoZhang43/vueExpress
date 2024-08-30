@@ -239,9 +239,6 @@ export default {
   font-weight: 600;
   line-height: 22.4px;
 }
-.align-left{
-  /* text-align: right; */
-}
 .describe-text-special{
   font-size: 20px;
   font-weight: 400;
