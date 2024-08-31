@@ -88,176 +88,180 @@ export default {
 }
 </script>
 
-<style lang="scss">  
-*{
-  box-sizing: border-box;
-}
-.main-container {  
-  /* height: calc(100vh - 16px); */
-  padding: 24px 28px;
-  display: grid;
-  grid-template-rows: 1fr 9fr 5fr;
-} 
-.login-header{
-  display: grid;
-  grid-template-columns: 5fr minmax(10px, 5fr) 4fr;
-}
-.kulaa-icon{
-  height: 42px;
-  width: 200px;
-}
-.position{
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 21.94px;
-  width: 150px;
-  margin-left: -30px;
-  color: #8C8C8C;
-}
-.change-btn{
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 18.29px;
-  color: #8039DD;
-}
-.header-section{
-  display: grid;
-  grid-template-columns: 2fr 2fr 1fr;
-  justify-content: center;
-  align-items: center;
-}
-.header-text{
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 22.4px;
-  text-align: left;
-}
-.claim-my-restaurant{
-  width: 157px;
-}
-.kulaa-for-restaurants{
-  width: 157px;
-}
-.user-icon{
-  width: 40px;
-  height: 40px;
-}
-.login-section{
-  padding: 0px 50px;
-  display: grid;
-  grid-template-rows: 2fr 2fr 1fr 4fr 2fr;
-}
-.welcome-text{
-  font-size: 34px;
-  font-weight: 700;
-  line-height: 41.45px;
-  margin-bottom: 0px;
-}
-.describe-text{
-  margin-top: 0px;
-}
-.input-name-container{
-  margin: auto 0px;
-}
-.input{
-  border: 1px solid #E6E6E6;
-  width: 750px;
-  height: 72px;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 22.4px;
-  color: #AFAFAF;
-  padding-left: 30px;
-}
-.input-name{
-  padding-left: 50px;
-  background-repeat: no-repeat;  
-  background-position: 25px center;
-  background-image: url(/public/asset/search.png);
-}
-.or{
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 30px;
-  text-align: center;
-}
-.gap{
-  margin-bottom: 20px;
-}
-.claim-my-resturant{
-  width: 437px;
-  height: 72px;
-  border-radius: 30px;
-  border: 1px solid #FBFBFB;
-  background: #8039DD;
-}
-.claim-my-resturant::placeholder{
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 20px;
-  text-align: center;
-  color: #FFFFFF;
-}
-.input-add-new-restaurant-container{
-  margin: auto 0px;
-}
-.claim-my-resturant-container{
-  margin: auto 0px;
-}
-.login-footer{
-  padding: 0px 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;  
-}
-.footer-part-one-container{
-  width: 100%;
-  display: grid;
-  grid-template-columns: 3fr 5fr 2fr;
-}
-.footer-part-two-container{
-  height: 50px;
-  width: 100%;
-}
-.slogen-container{
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-
-}
-.kulaa-icon{
-  width: 135px;
-  height: 46px;
-}
-.about-container{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-
-}
-.describe-text-bold{
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 22.4px;
-}
-.describe-text-special{
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 22.4px;
-  /* text-align: right; */
-}
-.app-icon{
-  width: 24px;
-  height: 24px;
-}
-.icon-list{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 130px;
-}
-.contact-container{
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-}
+<style lang="scss" scoped>  
+$primary-color: #8039DD;  
+$secondary-color: #8C8C8C;  
+$text-color: #AFAFAF;  
+$border-color: #E6E6E6;  
+$background-color: #FBFBFB;  
+$font-size-regular: 14px;  
+$font-size-bold: 16px;  
+$font-size-larger: 20px;  
+$border-radius: 30px;  
+  
+*{  
+  box-sizing: border-box;  
+}  
+  
+.main-container {    
+  padding: 24px 28px;  
+  display: grid;  
+  grid-template-rows: 1fr 9fr 5fr;  
+}   
+  
+.login-header {  
+  display: grid;  
+  grid-template-columns: 5fr minmax(10px, 5fr) 4fr;  
+  
+  .header-section {  
+    display: grid;  
+    grid-template-columns: 2fr 2fr 1fr;  
+    justify-content: center;  
+    align-items: center;  
+  
+    .position {  
+      font-size: $font-size-regular;  
+      font-weight: 700;  
+      line-height: 21.94px;  
+      width: 150px;  
+      margin-left: -30px;  
+      color: $secondary-color;  
+    }  
+  
+    .change-btn {  
+      font-size: $font-size-regular;  
+      font-weight: 700;  
+      line-height: 18.29px;  
+      color: $primary-color;  
+    }  
+  
+    .header-text {  
+      font-size: $font-size-regular;  
+      font-weight: 500;  
+      line-height: 22.4px;  
+      text-align: left;  
+    }  
+  }  
+}  
+  
+.login-section {  
+  padding: 0px 50px;  
+  display: grid;  
+  grid-template-rows: 2fr 2fr 1fr 4fr 2fr;  
+  
+  .welcome-text {  
+    font-size: 34px;  
+    font-weight: 700;  
+    line-height: 41.45px;  
+    margin-bottom: 0px;  
+  }  
+  
+  .describe-text {  
+    margin-top: 0px;  
+  }  
+  
+  .input {  
+    border: 1px solid $border-color;  
+    width: 750px;  
+    height: 72px;  
+    border-radius: $border-radius;  
+    font-size: $font-size-regular;  
+    font-weight: 400;  
+    line-height: 22.4px;  
+    color: $text-color;  
+    padding-left: 30px;  
+  
+    &.input-name {  
+      padding-left: 50px;  
+      background-repeat: no-repeat;    
+      background-position: 25px center;  
+      background-image: url(/public/asset/search.png);  
+    }  
+  }  
+  
+  .or {  
+    font-size: $font-size-bold;  
+    font-weight: 500;  
+    line-height: 30px;  
+    text-align: center;  
+  }  
+  
+  .gap {  
+    margin-bottom: 20px;  
+  }  
+  
+  .claim-my-resturant {  
+    width: 437px;  
+    height: 72px;  
+    border-radius: $border-radius;  
+    border: 1px solid $background-color;  
+    background: $primary-color;  
+  
+    &::placeholder {  
+      font-size: 18px;  
+      font-weight: 300;  
+      line-height: 20px;  
+      text-align: center;  
+      color: #FFFFFF;  
+    }  
+  }  
+}  
+  
+.login-footer {  
+  padding: 0px 50px;  
+  display: flex;  
+  flex-direction: column;  
+  justify-content: flex-end;    
+  
+  .footer-part-one-container {  
+    width: 100%;  
+    display: grid;  
+    grid-template-columns: 3fr 5fr 2fr;  
+  
+    .slogen-container {  
+      display: grid;  
+      grid-template-rows: 1fr 1fr;  
+    }  
+  
+    .about-container {  
+      display: grid;  
+      grid-template-columns: 1fr 1fr 1fr;  
+    }  
+  
+    .describe-text-bold {  
+      font-size: $font-size-larger;  
+      font-weight: 600;  
+      line-height: 22.4px;  
+    }  
+  
+    .describe-text-special {  
+      font-size: $font-size-larger;  
+      font-weight: 400;  
+      line-height: 22.4px;  
+    }  
+  
+    .app-icon {  
+      width: 24px;  
+      height: 24px;  
+    }  
+  
+    .icon-list {  
+      display: flex;  
+      flex-direction: row;  
+      justify-content: space-between;  
+      width: 130px;  
+    }  
+  
+    .contact-container {  
+      display: flex;  
+      flex-direction: column;  
+      align-items: end;  
+    }  
+  }  
+  
+  .footer-part-two-container {  
+    height: 50px;  
+    width: 100%;  
+  }  
+}  
 </style>
