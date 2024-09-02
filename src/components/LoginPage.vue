@@ -20,18 +20,20 @@
         <p className="describe-text">To claim your restaurant start by finding your restaurant</p>
       </section>
       <section className="input-name-container">
-        <input className="input input-name" type="text" placeholder="Restaurant Name">
+        <input v-model="restaurantName" className="input search" type="text" placeholder="Restaurant Name">
       </section>
       <section className="or-container">
         <p className="or">- OR -</p>
       </section>
       <section className="input-add-new-restaurant-container">
         <p className="describe-text gap">Add a new restaurant</p>
-        <input className="input gap" type="text" placeholder="Restaurant Name">
-        <input className="input gap" type="text" placeholder="Address">
+        <input v-model="restaurantName" className="input gap" type="text" placeholder="Restaurant Name">
+        <input v-model="address" className="input gap" type="text" placeholder="Address">
       </section>
       <section className="claim-my-resturant-container">
-        <input className="claim-my-resturant" type="text" placeholder="Claim My Restaurant">
+        <button className="claim-my-resturant" @click="goToPage('/signup')">
+          Continue
+        </button>
       </section>
     </section>
     <footer className="login-footer">
@@ -80,18 +82,48 @@
 </template>
 
 <script scoped>
-export default {
+import { defineComponent, computed } from 'vue';  
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+
+export default defineComponent({
   name: 'LoginPage',
-  props: {
-      msg: String
-  }
-}
+  setup() {
+    const store = useStore();  
+    const router = useRouter();  
+    const restaurantName = computed({  
+      get: () => store.getters.restaurantName,  
+      set: (value) => store.commit('setRestaurantName', value),  
+    });  
+    const address = computed({  
+      get: () => store.getters.address,  
+      set: (value) => store.commit('setAddress', value),  
+    });
+    const goToPage = (url) => {  
+      if(!restaurantName.value){
+        alert("餐厅名称为必填！");
+        return;
+      }
+      if(!address.value){
+        alert("地址为必填！");
+        return;
+      }
+      router.push(`${url}`); 
+    };  
+
+    return { 
+      goToPage,
+      restaurantName,
+      address
+    }; 
+  } 
+})
 </script>
 
 <style lang="scss" scoped>  
 $primary-color: #8039DD;  
 $secondary-color: #8C8C8C;  
-$text-color: #AFAFAF;  
+$text-color: #000000;  
 $border-color: #E6E6E6;  
 $background-color: #FBFBFB;  
 $font-size-regular: 14px;  
@@ -171,7 +203,7 @@ $border-radius: 30px;
     color: $text-color;  
     padding-left: 30px;  
   
-    &.input-name {  
+    &.search {  
       padding-left: 50px;  
       background-repeat: no-repeat;    
       background-position: 25px center;  
@@ -196,14 +228,16 @@ $border-radius: 30px;
     border-radius: $border-radius;  
     border: 1px solid $background-color;  
     background: $primary-color;  
-  
-    &::placeholder {  
-      font-size: 18px;  
-      font-weight: 300;  
-      line-height: 20px;  
-      text-align: center;  
-      color: #FFFFFF;  
-    }  
+    font-size: 18px;  
+    font-weight: 300;  
+    line-height: 20px;  
+    text-align: center;  
+    color: #FFFFFF;  
+    cursor: pointer; 
+
+    &:hover{
+      color: #330dcb;
+    }
   }  
 }  
   

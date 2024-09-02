@@ -2,20 +2,47 @@ import { createStore } from 'vuex';
 
 export default createStore({  
   state: {  
-    count: 0,
+    restaurantName: '',
+    address: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    password: ''
   },  
-  mutations: {  
-    increment(state){
-        state.count++;
+  mutations: { 
+    setRestaurantName(state, restaurantName){
+      state.restaurantName = restaurantName;
     },
-    decrement(state){
-        state.count--;
+    setAddress(state, address){
+      state.address = address;
+    },
+    setFirstName(state, firstName){
+      state.firstName = firstName;
+    },
+    setLastName(state, lastName){
+      state.lastName = lastName;
+    },
+    setEmail(state, email){
+      state.email = email;
+    },
+    setPhoneNumber(state, phoneNumber){
+      state.phoneNumber = phoneNumber;
+    },
+    setPassword(state, password){
+      state.password = password;
     },
   },  
   actions: {  
     // 在这里定义提交 mutation 的方法  
   },  
   getters: {  
-    // 在这里定义获取状态的方法  
-  }  
+    restaurantName: state => state.restaurantName, 
+    address: state => state.address, 
+    firstName: state => state.firstName, 
+    lastName: state => state.lastName, 
+    email: state => state.email, 
+    phoneNumber: state => state.phoneNumber, 
+    password: state => state.password, 
+  }   
 });

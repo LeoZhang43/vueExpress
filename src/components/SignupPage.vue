@@ -4,7 +4,7 @@
       <section className="icon-position header-section">
         <img className="kulaa-icon" src="/asset/kulaa.png" alt="kulaaIcon">
         <p className="position">London, Islington</p>
-        <p className="change-btn"> change</p>
+        <p className="change-btn">change</p>
       </section>
       <section className="blank-space">
       </section>
@@ -16,25 +16,33 @@
     </header>
     <section className="login-section">
       <section className="welcome">
-        <p className="back-btn">&lt; Back</p>
+        <button class='back-btn' @click="goToPage('/login')">
+          &lt; Back
+        </button>
         <p className="welcome-text">Create a free account to manage your kulaa page</p>
         <p className="describe-text">Your Login Details</p>
       </section>
       <section className="input-container">
-        <input className="input gap" type="text" placeholder="First Name">
-        <input className="input gap" type="text" placeholder="Last Name">
-        <input className="input gap" type="text" placeholder="Email">
-        <input className="input gap" type="text" placeholder="Phone Number">
-        <input className="input gap" type="text" placeholder="Password">
+        <input v-model="firstName" className="input gap" type="text" placeholder="First Name">
+        <input v-model="lastName" className="input gap" type="text" placeholder="Last Name">
+        <input v-model="email" className="input gap" type="text" placeholder="Email">
+        <input v-model="phoneNumber" className="input gap" type="text" placeholder="Phone Number">
+        <input v-model="password" className="input gap" type="password" placeholder="Password">
         <section className="check-list gap">
-          <span className="checkCircle"></span>
-          <span>By continuing you agree to Kulaa's Terms of Service & Privacy Policy</span>
+          <span :class="['checkCircle', {'checked': termsAndConditionIsChecked}]" @click="termsAndConditionToggleCheck"></span>
+          <span>By continuing you agree to Kulaa's 
+            <a href="/terms">Terms of Service</a>
+             & 
+            <a href="/privacy">Privacy Policy</a>
+          </span>
         </section>
         <section className="check-list gap">
-          <span className="checkCircle checked"></span>
+          <span :class="['checkCircle', {'checked': subscribtionIsChecked}]" @click="subscribtionToggleCheck"></span>
           <span>We may send you marketing emails about Kulaa products and service. You can unsubscribe at any time.</span>
         </section>
-        <input className="claim-my-resturant" type="text" placeholder="Claim My Restaurant">
+        <button className="claim-my-resturant" :disabled="!termsAndConditionIsChecked || !subscribtionIsChecked" @click="goToPage('/accountinfo')">
+          Claim My Resturant
+        </button>
       </section>
     </section>
     <footer className="login-footer">
@@ -83,18 +91,88 @@
 </template>
 
 <script scoped>
-export default {
+import { defineComponent, ref, computed } from 'vue';  
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+
+export default defineComponent({
   name: 'SignupPage',
-  props: {
-      msg: String
+  setup() {
+    const store = useStore();
+    const router = useRouter();  
+    const termsAndConditionIsChecked = ref(false);  
+    const subscribtionIsChecked = ref(false);
+
+    const firstName = computed({  
+      get: () => store.getters.firstName,  
+      set: (value) => store.commit('setFirstName', value),  
+    });  
+    const lastName = computed({  
+      get: () => store.getters.lastName,  
+      set: (value) => store.commit('setLastName', value),  
+    });
+    const email = computed({  
+      get: () => store.getters.email,  
+      set: (value) => store.commit('setEmail', value),  
+    });  
+    const phoneNumber = computed({  
+      get: () => store.getters.phoneNumber,  
+      set: (value) => store.commit('setPhoneNumber', value),  
+    });
+    const password = computed({  
+      get: () => store.getters.password,  
+      set: (value) => store.commit('setPassword', value),  
+    });
+    const termsAndConditionToggleCheck = () => {  
+      termsAndConditionIsChecked.value = !termsAndConditionIsChecked.value; 
+    }; 
+    const subscribtionToggleCheck = () => {  
+      subscribtionIsChecked.value = !subscribtionIsChecked.value;
+    }; 
+    const goToPage = (url) => {  
+      if(!firstName.value){
+        alert("名字为必填！");
+        return;
+      }
+      if(!lastName.value){
+        alert("姓氏为必填！");
+        return;
+      }
+      if(!email.value){
+        alert("邮箱为必填！");
+        return;
+      }
+      if(!phoneNumber.value){
+        alert("电话号码为必填！");
+        return;
+      }
+      if(!password.value){
+        alert("密码为必填！");
+        return;
+      }
+      router.push(`${url}`);
+    };  
+  
+    return { 
+      termsAndConditionIsChecked,
+      subscribtionIsChecked,
+      goToPage,
+      termsAndConditionToggleCheck,
+      subscribtionToggleCheck,
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      password
+    }; 
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>  
 $primary-color: #8039DD;  
 $secondary-color: #8C8C8C;  
-$text-color: #AFAFAF;  
+$text-color: #000000;  
 $border-color: #E6E6E6;  
 $background-color: #FBFBFB;  
 $font-size-regular: 14px;  
@@ -156,6 +234,13 @@ $border-radius: 30px;
     line-height: 22.4px;
     color: #8039DD;
     margin: 0px 0px;
+    border: none; /* 去除边框 */  
+    background-color: transparent; /* 设置背景颜色为透明 */
+    cursor: pointer; 
+
+    &:hover{
+      color: #330dcb;
+    }
   }
 
   .welcome-text {  
@@ -209,15 +294,20 @@ $border-radius: 30px;
     border-radius: $border-radius;  
     border: 1px solid $background-color;  
     background: $primary-color;  
-    margin-top: 20px;
-  
-    &::placeholder {  
-      font-size: 18px;  
-      font-weight: 300;  
-      line-height: 20px;  
-      text-align: center;  
-      color: #FFFFFF;  
-    }  
+    font-size: 18px;  
+    font-weight: 300;  
+    line-height: 20px;  
+    text-align: center;  
+    color: #FFFFFF;  
+    cursor: pointer; 
+
+    &:hover{
+      color: #330dcb;
+    }
+
+    &:disabled{
+      background: $secondary-color;
+    }
   }  
 }  
   
